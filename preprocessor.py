@@ -1,4 +1,5 @@
 import numpy as np
+import pandas as pd
 from sklearn.model_selection import train_test_split
 
 
@@ -89,14 +90,27 @@ class Preprocessor:
     
     def drop_missing(self, dataset):
         """ This method drops missing entries (rows) using pandas"""
-        
-        dataset.dropna(inplace=True, axis=0)
+        if type(dataset) == type(pd.DataFrame()):
+            dataset.dropna(inplace=True, axis=0)
+            
+        elif type(dataset) == type(np.array):
+            dataset = pd.DataFrame(dataset)
+            dataset.dropna(inplace=True, axis=0)
+            dataset = dataset.to_numpy()
+            
         return dataset
         
-    def repalce_missing(self, dataset):
+    def replace_missing(self, dataset):
         """ This method replaces missing entries with the mode of the column """
         
-        dataset.fillna(dataset.mode(), inplace=True, axis=1)
+        if type(dataset) == type(pd.DataFrame()):
+            dataset.fillna(dataset.mode(), inplace=True, axis=0)
+            
+        elif type(dataset) == type(np.array):
+            dataset = pd.DataFrame(dataset)
+            dataset.fillna(dataset.mode(), inplace=True, axis=0)
+            dataset = dataset.to_numpy()
+            
         return dataset
         
     def dataframe_to_numpy(self, dataset, dataset_name):

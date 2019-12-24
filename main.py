@@ -70,7 +70,9 @@ from preprocessor import Preprocessor
 preprocess = Preprocessor()
 
 # Cleaning the data
-if method_identifier != 3:
+if method_identifier == 3: # Drop missing rows in iris dataset
+    X = preprocess.drop_missing(X)
+else: # Drop missing rows in diamond or wisconsin breast cancer datasets
     dataset = preprocess.drop_missing(dataset)
 
 if method_identifier == 1:
@@ -80,9 +82,6 @@ if method_identifier == 1:
 elif method_identifier == 2:
     X, y = preprocess.dataframe_to_numpy(dataset, 'diamonds')
     X, y = preprocess.encoding(X, y, 'diamonds')
-
-else:
-    print('\n The iris dataset is already encoded')
 
 # Splitting the data into train and test sets
 if method_identifier == 1 or method_identifier == 2:
@@ -132,12 +131,13 @@ elif method_identifier == 3:
     from clustering import Clustering
 
     clustering = Clustering(algorithm_name)
-    clusters = clustering.cluster(X_train, X_test)
+    n_clusters = clustering.tune_parameters(X_train)
+    clusters = clustering.cluster(X_train, X_test, n_clusters)
 
     # Visualizing the results
     visualizer = Visualizer()
-    visualizer.plot_clustering_without_legend(iris)
-    visualizer.plot_clustering_with_legend(iris)
+    visualizer.plot_clustering(X_test, clusters)
+    # visualizer.plot_clustering_with_legend(iris)
 
     print("The resulting clusters: " + str(clusters))
     print(str(algorithm_name))
