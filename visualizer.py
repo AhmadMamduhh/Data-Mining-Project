@@ -18,15 +18,18 @@ class Visualizer:
             plt.show()
 
         elif method_identifier == 1:
-            # -------------Classification-----------------------
-            # The actual data
+            
+            # Plotting the actual number of patients with malignant tumors
+            # and the actual number of patients with benign tumors.
             plt.hist(y_test)
             plt.title('Malginant vs. Benign (Actual Data)')
             plt.xlabel('0 = Benign   1 = Malignant')
             plt.ylabel('Number of patients')
             plt.show()
 
-            # The predicted classification
+            
+            # Plotting the predicted number of patients with malignant tumors
+            # and the predicted number of patients with benign tumors.
             plt.hist(y_result)
             plt.title('Malginant vs. Benign (Predicted Classification Results)')
             plt.xlabel('0 = Benign   1 = Malignant')

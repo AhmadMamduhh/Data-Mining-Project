@@ -50,7 +50,7 @@ class Regressor:
             
         
         elif self.regressor_name == "Random Forest":
-            """ Random Forest Classifier is based on the decision tree regressor.
+            """ Random Forest regressor is based on the decision tree regressor.
             The random forest is an algorithm consisting of many decisions trees.
             It uses bagging and feature randomness when building each individual tree to try to create 
             an uncorrelated forest of trees whose prediction by committee is more accurate than 
@@ -58,7 +58,7 @@ class Regressor:
             through the same process, but now it visits all the different trees in the ensemble, 
             which are were grown using random samples of both training data and features.
             Depending on the task at hand, the functions used for aggregation will differ. 
-            For Classification problems, it uses the mean of all the tree results to get the output
+            For regression problems, it uses the mean of all the tree results to get the output
             value """
             
             from sklearn.ensemble import RandomForestRegressor

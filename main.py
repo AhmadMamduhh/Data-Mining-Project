@@ -101,11 +101,11 @@ if method_identifier == 1:
     classifier = Classifier(algorithm_name)
     y_predicted = classifier.classify(X_train, y_train, X_test)
     classifier_accuracy = classifier.get_accuracy(y_test, y_predicted)
-    print("y_predicted: " + str(y_predicted))
-    print("y_test: " + str(y_test))
+
     # Visualizing the results
     visualizer = Visualizer()
     visualizer.plot_results(y_test, y_predicted, method_identifier)
+    
     print('The accuracy is: ' + str(classifier_accuracy) + ' %')
     print(algorithm_name)
 
@@ -131,13 +131,12 @@ elif method_identifier == 3:
     from clustering import Clustering
 
     clustering = Clustering(algorithm_name)
-    n_clusters = clustering.tune_parameters(X_train)
+    n_clusters, inertia = clustering.tune_parameters(X_train)
     clusters = clustering.cluster(X_train, X_test, n_clusters)
 
     # Visualizing the results
     visualizer = Visualizer()
     visualizer.plot_clustering(X_test, clusters)
-    # visualizer.plot_clustering_with_legend(iris)
 
-    print("The resulting clusters: " + str(clusters))
+    print("The clustering model's inertia: " + str(inertia))
     print(str(algorithm_name))

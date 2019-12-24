@@ -11,7 +11,7 @@ class Clustering:
             from sklearn.cluster import KMeans
 
             # Train the model
-            trained_model = KMeans(n_clusters= number_clusters, random_state=0).fit(X_train)
+            trained_model = KMeans(n_clusters= number_clusters, random_state=100).fit(X_train)
 
             # Predict
             return trained_model.predict(X_test)
@@ -30,15 +30,14 @@ class Clustering:
             
             for i in range(0,len(n_clusters)):
                 
-                model = KMeans(n_clusters= n_clusters[i], random_state=0).fit(X_train)
+                model = KMeans(n_clusters= n_clusters[i], random_state=100).fit(X_train)
                 temp_inertia = model.inertia_
-                print(temp_inertia)
             
                 if temp_inertia < min_inertia:
                     min_inertia = temp_inertia
                     index = i
             
-            return n_clusters[index]
+            return n_clusters[index], min_inertia
                 
                 
                 
