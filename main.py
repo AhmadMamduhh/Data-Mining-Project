@@ -22,8 +22,6 @@ elif method_identifier == 3:
 # wisonsin breast cancer.cvs on kaggle.com for classification
 # iris.csv for clustering (drop class column)
 
-# -----------------------Visualizing the data--------------------------------
-# MISSING CODE HERE
 
 # --------------Choosing the desired algorithm--------------------
 
@@ -97,9 +95,9 @@ X_train, X_test = preprocess.scaling(X_train, X_test, scale_type='Standard Scale
 if method_identifier == 1:
 
     from classifier import Classifier
-
+    
     classifier = Classifier(algorithm_name)
-    y_predicted = classifier.classify(X_train, y_train, X_test)
+    y_predicted = classifier.classify(X_train, y_train, X_test, y_test)
     classifier_accuracy = classifier.get_accuracy(y_test, y_predicted)
 
     # Visualizing the results

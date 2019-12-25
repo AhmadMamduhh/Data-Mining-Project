@@ -25,6 +25,7 @@ class Visualizer:
             plt.title('Malginant vs. Benign (Actual Data)')
             plt.xlabel('0 = Benign   1 = Malignant')
             plt.ylabel('Number of patients')
+            plt.grid()
             plt.show()
 
             
@@ -34,6 +35,7 @@ class Visualizer:
             plt.title('Malginant vs. Benign (Predicted Classification Results)')
             plt.xlabel('0 = Benign   1 = Malignant')
             plt.ylabel('Number of patients')
+            plt.grid()
             plt.show()
 
 

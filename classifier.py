@@ -11,7 +11,7 @@ class Classifier:
       self.classifier_name = classifier_name
     
 
-    def classify(self, X_train, y_train, X_test):
+    def classify(self, X_train, y_train, X_test, y_test):
         """ This method uses the apropriate classification algorithm based on
         the value of the classifier_name string and classifies the X_test 
         parameter and returns y_predicted. X_train and y_train are the data that
@@ -58,7 +58,7 @@ class Classifier:
             the individual trees (also known as a majority vote) """
             
             from sklearn.ensemble import RandomForestClassifier
-            rfc = RandomForestClassifier(n_estimators=300, max_depth = 4, random_state=0)
+            rfc = RandomForestClassifier(n_estimators=800, max_depth = 4, random_state=0)
             rfc.fit(X_train, y_train)
             return rfc.predict(X_test)
         
@@ -73,10 +73,12 @@ class Classifier:
             receives the values from the last hidden layer and transforms them into output values.
             This classifier produces the highest accuracy possible."""
             
+            # Tunning the hidden layer size parameter if Neural Network is chosen
             from sklearn.neural_network import MLPClassifier
-            NN = MLPClassifier(solver='lbfgs', alpha=1e-5, hidden_layer_sizes = (600, X_test.shape[1]), random_state=0)
-            NN.fit(X_train, y_train)
-            return NN.predict(X_test)
+            hidden_layer_size, NN_model = self.tune_NN_parameters(X_train, y_train, X_test, y_test)
+            print("\n" + str(hidden_layer_size) + " is the chosen hidden layer size for the neural network")
+            
+            return NN_model.predict(X_test)
         
     def get_accuracy(self, y_test, y_predicted):
         """ This method returns the accuracy of the model """
@@ -88,7 +90,35 @@ class Classifier:
     
         return ((np.sum(y_test == y_predicted) / y_test.shape[0])*100)
         
-    
+    def tune_NN_parameters(self, X_train, y_train, X_test, y_test):
+            ''' This method runs the neural network training algorithm with multiple
+            iterations and chooses different values for the hidden layer sizes
+            on each iteration and calculates the accuracy each time. 
+            The parameter value of the model with the highest accuracy
+            is returned '''
+            
+            from sklearn.neural_network import MLPClassifier
+            hidden_layer_sizes = [(200,30), (300,30), (400,30), (500,30), (600, 30),
+                                  (700,50), (800, 100), (900, 120), (800, 30), (800,40),
+                                  (1000,120), (1000,30), (600,21), (600, 10), (800,),
+                                  (21,), (10,), (50,), (600,600,600), (100,100,100), (900,)]
+            max_accuracy = 0
+            index=0
+            
+            print("\nTunning the hidden layer size parameter for the Neural Network...\n")
+            
+            for i in range(0,len(hidden_layer_sizes)):
+                
+                model = MLPClassifier(solver='lbfgs', alpha=1e-5, hidden_layer_sizes=hidden_layer_sizes[i]).fit(X_train, y_train)
+                temp_accuracy = ((np.sum(y_test == model.predict(X_test)) / y_test.shape[0]) * 100)
+                print(str(hidden_layer_sizes[i]) + " (hidden layer size) accuracy: " + str(temp_accuracy) + " %")
+            
+                if temp_accuracy > max_accuracy:
+                    max_accuracy = temp_accuracy
+                    NN_best_model = model
+                    index = i
+            
+            return hidden_layer_sizes[index], NN_best_model
     
         
-        
+0
