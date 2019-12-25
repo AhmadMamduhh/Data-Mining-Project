@@ -83,10 +83,10 @@ elif method_identifier == 2:
 
 # Splitting the data into train and test sets
 if method_identifier == 1 or method_identifier == 2:
-    X_train, X_test, y_train, y_test = preprocess.split_data(X, 0.2, y)
+    X_train, X_test, y_train, y_test = preprocess.split_data(X, 0.19, y)
 
 elif method_identifier == 3:
-    X_train, X_test = preprocess.split_data(X, test_ratio=0.2)
+    X_train, X_test = preprocess.split_data(X, test_ratio=0.3)
 
 # Scaling the data
 X_train, X_test = preprocess.scaling(X_train, X_test, scale_type='Standard Scaler')

@@ -78,7 +78,7 @@ class Regressor:
             This regressor produces the highest accuracy possible."""
             
             from sklearn.neural_network import MLPRegressor
-            NN = MLPRegressor(solver='lbfgs', alpha=1e-5, hidden_layer_sizes = (200, X_test.shape[1]), random_state=0)
+            NN = MLPRegressor(solver='lbfgs', alpha=1e-5, hidden_layer_sizes = (100,), random_state=0)
             NN.fit(X_train, y_train)
             return NN.predict(X_test)
         
