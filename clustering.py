@@ -27,16 +27,20 @@ class Clustering:
             n_clusters = [1, 2, 3, 4]
             min_inertia = 9999
             index=0
+            print("\nTuning the number of clusters parameter...\n")
             
             for i in range(0,len(n_clusters)):
                 
                 model = KMeans(n_clusters= n_clusters[i], random_state=100).fit(X_train)
                 temp_inertia = model.inertia_
+                print("The number of clusters: " + str(n_clusters[i]) +
+                      " corresponding inertia: " + str(temp_inertia))
             
                 if temp_inertia < min_inertia:
                     min_inertia = temp_inertia
                     index = i
-            
+            print("\nThe chosen number of clusters is: " + str(n_clusters[index]) +
+            " with corresponding inertia of: " + str(min_inertia) )
             return n_clusters[index], min_inertia
                 
                 

@@ -7,7 +7,7 @@ class Visualizer:
     so  the inputs and results can be understood clearly """
 
 
-    def plot_results(self, y_test, y_result, method_identifier):
+    def plot_classifier_regressor(self, y_test, y_result, method_identifier):
         """ This method plots the actual data against the predicted data """
 
         if method_identifier == 2: # Plotting the predicted price vs actual price when applying regression

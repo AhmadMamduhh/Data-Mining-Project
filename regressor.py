@@ -82,7 +82,7 @@ class Regressor:
             NN.fit(X_train, y_train)
             return NN.predict(X_test)
         
-    def get_accuracy(self, y_test, y_predicted):
+    def get_score(self, y_test, y_predicted):
         """ This method returns the accuracy of the model """
  
         # Import scikit-learn metrics module for accuracy calculation

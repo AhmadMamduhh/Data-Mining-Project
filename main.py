@@ -102,7 +102,7 @@ if method_identifier == 1:
 
     # Visualizing the results
     visualizer = Visualizer()
-    visualizer.plot_results(y_test, y_predicted, method_identifier)
+    visualizer.plot_classifier_regressor(y_test, y_predicted, method_identifier)
     
     print('The accuracy is: ' + str(classifier_accuracy) + ' %')
     print(algorithm_name)
@@ -114,13 +114,13 @@ elif method_identifier == 2:
 
     regressor = Regressor(algorithm_name)
     y_predicted = regressor.predict(X_train, y_train, X_test)
-    regressor_accuracy = regressor.get_accuracy(y_test, y_predicted)
+    regressor_score = regressor.get_score(y_test, y_predicted)
 
     # Visualizing the results
     visualizer = Visualizer()
-    visualizer.plot_results(y_test, y_predicted, method_identifier)
+    visualizer.plot_classifier_regressor(y_test, y_predicted, method_identifier)
 
-    print('The coefficient of determination is: ' + str(regressor_accuracy))
+    print('The coefficient of determination is: ' + str(regressor_score))
     print(algorithm_name)
 
 # ---------------------Clustering the data------------------------------------
